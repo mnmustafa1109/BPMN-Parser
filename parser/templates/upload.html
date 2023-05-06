@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block container %}
+    {% comment %} 
+      parameter passed are lanes, tasks, events, processes, gateways and flows
+      which are lists of the corresponding elements
+    {% endcomment %}
+
+    {% comment %} 
+    check if the variable error is defined, if so, display the error message
+    {% endcomment %}
+    {% if error %}
+    {% comment %} 
+        display error as a red box with white text do inline styling with round border
+
+    {% endcomment %}
+
+    <div style="border: 1px solid red; border-radius: 3px; background-color: red; color: white; padding: 15px;">
+      {{ error }}
+    </div>
+    
+    
+
+    {% endif %}
+
+    {% comment %}
+    {% endcomment %}
+
+    <article>
+
+      <h2>Upload</h2>
+
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Upload" />
+      </form>
+    </article>
+
+   
+{% endblock %}

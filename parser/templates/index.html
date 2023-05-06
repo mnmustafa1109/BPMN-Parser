@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block container %}
+    {% comment %} 
+      parameter passed are lanes, tasks, events, processes, gateways and flows
+      which are lists of the corresponding elements
+    {% endcomment %}
+
+
+    <article>
+
+      <h2>Process</h2>
+      <ul>
+        {% for process in processes %}
+          <li>{{ process }}</li>
+        {% endfor %}
+      </ul>
+      
+    </article>
+
+    <article>
+    <h2>Statistics</h2>
+
+      
+      <p>Number of Lanes: {{ lanes|length }}</p>
+    <p>Number of Tasks: {{ tasks|length }}</p>
+    <p>Number of Events: {{ events|length }}</p>
+    <p>Number of Processes: {{ processes|length }}</p>
+    <p>Number of Gateways: {{ gateways|length }}</p>
+    <p>Number of Flows: {{ flows|length }}</p></article>
+
+   
+
+    <article>
+     
+    <h2>Names</h2>
+     
+      <div style="display: flex;">
+        <div style="flex: 1;">
+          <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% comment %} 
+              render a table with one list having the tasks and the other having the processes
+              {% endcomment %}
+              {% for task in tasks %}
+                <tr>
+                  <td>{{ task }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div style="flex: 1;">
+          <table>
+            <thead>
+                <tr>
+                    <th>Events</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for event in events %}
+                <tr>
+                  <td>{{ event }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+    
+          </table>
+        </div>
+      </div>
+
+      {% comment %} 
+      do the same for gateways and lanes
+       {% endcomment %}
+
+      <div style="display: flex;">
+        <div style="flex: 1;">
+          <table>
+            <thead>
+                <tr>
+                    <th>Gateways</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for gateway in gateways %}
+                <tr>
+                  <td>{{ gateway }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div style="flex: 1;">
+          <table>
+            <thead>
+                <tr>
+                    <th>Lanes</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for lane in lanes %}
+                <tr>
+                  <td>{{ lane }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+    
+          </table>
+        </div>
+      
+    </article>
+
+
+
+    {% comment %} button that says go back which redirect to the root directory of the site {% endcomment %}
+
+    <button onclick="window.location.href = '/';">Go Back</button>
+
+{% endblock %}

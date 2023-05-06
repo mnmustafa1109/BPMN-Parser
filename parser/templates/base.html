@@ -1,0 +1,20 @@
+{% load i18n %}
+{% load static %}
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static "css/pico/pico.min.css" %}">
+  <title>Good App</title>
+  {% block header %}
+  {% endblock %}
+</head>
+<body >
+<main  class="container">
+  {% block container %}
+  {% endblock %}
+</main>
+</body>
+</html>
