@@ -44,14 +44,13 @@
                 </tr>
             </thead>
             <tbody>
-              {% comment %} 
-              render a table with one list having the tasks and the other having the processes
-              {% endcomment %}
+              {% comment %} print the keys in a dictionary named task_data {% endcomment %}
               {% for task in tasks %}
                 <tr>
                   <td>{{ task }}</td>
                 </tr>
               {% endfor %}
+              
             </tbody>
         </table>
         </div>
@@ -113,6 +112,37 @@
           </table>
         </div>
       
+    </article>
+
+    {% comment %} 
+    make an article with h2 of Task Time and a table with the task name and the time it takes to complete it
+    task and time is stored in a dict named task_data with total time at the end
+     {% endcomment %}
+
+    <article>
+      <h2>Task Time</h2>
+      <table>
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for task, time in tasks.items %}
+            <tr>
+              <td>{{ task }}</td>
+              <td>{{ time }}</td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td><b> Total Time<b> </td>
+            {% comment %} print the total time {% endcomment %}
+            <td><b> {{ total_time }}<b> </td>
+          </tr>
+        </tbody>
+
+      </table>
     </article>
 
 

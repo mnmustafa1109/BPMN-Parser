@@ -123,40 +123,6 @@ def result(request):
 
 
 
-    print("Number of lanes: ", len(lanelist))
-    print("Number of tasks: ", len(tasks))
-    print("Number of events: ", len(events))
-    print("Number of processes: ", len(processlist))
-    print ("Number of gateways: ", len(gateways))
-    print ("Number of flows: ", len(flows))
-    
-    
-    for lane in lanelist:
-        print("Lane: ", lane.attrib['name'])
-    print ("-----------------------------")
-    
-    for task in tasks:
-        print("Task: ", task.attrib['name'])
-    print ("-----------------------------")
-    
-    for event in events:
-        print("Event: ", event.attrib['name'])
-        print(event.tag)
-    print ("-----------------------------")
-    
-    for process in processlist:
-        print("Process: ", process.attrib['name'])
-    print ("-----------------------------")
-    
-    for gateway in gateways:
-        print("Gateway: ", gateway.attrib['name'])
-        # print tag name
-        print(gateway.tag)
-    print ("-----------------------------")
-    
-    for flow in flows:
-        print("Flow: ", flow.attrib['id'])
-    print ("-----------------------------")
     template_name = "index.html"
     
     # store name of the lanes, tasks, events and processes in a list
@@ -166,10 +132,23 @@ def result(request):
     for lane in lanelist:
         lanes_name.append(lane.attrib['name'])
         
-    tasks_name = []
+    task_data = {}
+    total_time = 0
     
+        # go into extensionElements tag
     for task in tasks:
-        tasks_name.append(task.attrib['name'])
+        for child in task:    
+            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}extensionElements":
+                for child2 in child:
+                    if child2.tag == "{http://camunda.org/schema/zeebe/1.0}properties":
+                        print(child2.tag)
+                        for child3 in child2:
+                            if child3.tag == "{http://camunda.org/schema/zeebe/1.0}property":
+                                    # get the Time property 
+                                if child3.attrib['name'] == "Time":
+                                    task_data[task.attrib['name']] = child3.attrib['value']
+                                    total_time += int(child3.attrib['value'])
+
         
     events_name = []
     
@@ -185,13 +164,14 @@ def result(request):
     
     for gateway in gateways:
         gateways_name.append(gateway.attrib['name'])
+        
 
     # remove file
-    if os.path.isfile("static/upload/bpmn.xml"):
-        os.remove("static/upload/bpmn.xml")
+    # if os.path.isfile("static/upload/bpmn.xml"):
+        # os.remove("static/upload/bpmn.xml")
     
     # display the numbers of lanes, tasks, events and processes
-    return render(request, template_name, {'lanes': lanes_name, 'tasks': tasks_name, 'events': events_name, 'processes': processes_name, 'gateways': gateways_name, 'flows': flows})
+    return render(request, template_name, {'lanes': lanes_name, 'tasks': task_data, 'events': events_name, 'processes': processes_name, 'gateways': gateways_name, 'flows': flows, 'total_time': total_time})
 
     
     
