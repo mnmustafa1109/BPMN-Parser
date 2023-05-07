@@ -114,12 +114,69 @@
       
     </article>
 
+    {% comment %} display time for processes {% endcomment %}
+    <article>
+      <h2>Process Time</h2>
+      <table>
+        <thead>
+            <tr>
+                <th>Process</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for process, time in processes.items %}
+            <tr>
+              <td>{{ process }}</td>
+              <td>{{ time }}</td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td><b> Total Time<b> </td>
+            {% comment %} print the total time {% endcomment %}
+            <td><b> {{ sum_processes }}<b> </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </article>
+
+
+    {% comment %} display time for lanes {% endcomment %}
+    <article>
+      <h2>Lane Time</h2>
+      <table>
+        <thead>
+            <tr>
+                <th>Lane</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for lane, time in lanes.items %}
+            <tr>
+              <td>{{ lane }}</td>
+              <td>{{ time }}</td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td><b> Total Time<b> </td>
+            {% comment %} print the total time {% endcomment %}
+            <td><b> {{ sum_lanes }}<b> </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </article>
+
+    
+
     {% comment %} 
     make an article with h2 of Task Time and a table with the task name and the time it takes to complete it
     task and time is stored in a dict named task_data with total time at the end
      {% endcomment %}
 
-    <article>
+     <article>
       <h2>Task Time</h2>
       <table>
         <thead>
@@ -138,13 +195,46 @@
           <tr>
             <td><b> Total Time<b> </td>
             {% comment %} print the total time {% endcomment %}
-            <td><b> {{ total_time }}<b> </td>
+            <td><b> {{ sum_tasks }}<b> </td>
           </tr>
         </tbody>
 
       </table>
     </article>
 
+
+    <article>
+      <h2>Event Time</h2>
+      <table>
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for event, time in events.items %}
+            <tr>
+              <td>{{ event }}</td>
+              <td>{{ time }}</td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td><b> Total Time<b> </td>
+            {% comment %} print the total time {% endcomment %}
+            <td><b> {{ sum_events }}<b> </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </article>
+
+    <article>
+
+      <h2>Cycle Time</h2>
+      <p> The cycle time is the time it takes for a process to complete from start to finish. </p>
+      <p> The cycle time is for all processes is {{ cycle_time }} </p>
+      </article>
 
 
     {% comment %} button that says go back which redirect to the root directory of the site {% endcomment %}
