@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-*zv86^56j(#20)t@lleaj1wgf&r^b$rvd5@6_(bjvbgx+wvtbr
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]  # new
+CSRF_TRUSTED_ORIGINS = ["https://bpmn-parser.fly.dev"]
 
 # Application definition
 
