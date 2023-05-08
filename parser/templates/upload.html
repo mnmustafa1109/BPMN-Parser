@@ -28,13 +28,26 @@
 
     <article>
 
-      <h2>Upload</h2>
+{#        welcome to bpmn parset text#}
+
+        <h1>Welcome to BPMN Parser</h1>
+
+      <h2>Upload your file</h2>
 
       <form action="/upload" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Upload" />
       </form>
+    </article>
+
+    <article>
+{#  write text with  credits to mnmustafa1109 syednouman72#}
+        <h2>Contributors</h2>
+        <p>Mustafa Mehar</p>
+        <p>Syed Nouman</p>
+    <p>Shahmeer Durrani</p>
+
     </article>
 
    
