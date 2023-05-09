@@ -14,12 +14,12 @@ class StaticViewSitemap(sitemaps.Sitemap):
 
 
 # Fake python code to have more percentage of code in python category
-def main():
-    print("Hello World!")
-
-
-if __name__ == "__main__":
-    main()
+# def main():
+#     print("Hello World!")
+#
+#
+# if __name__ == "__main__":
+#     main()
 
 # Compare this snippet from parser/views.py:
 # from django.shortcuts import render
