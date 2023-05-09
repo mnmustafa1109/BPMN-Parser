@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.files import File
 from django.core.files.storage import FileSystemStorage
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ElTr
 import os
 from . import forms
 
@@ -22,7 +22,7 @@ def result(request):
     if not os.path.exists(xmlpath):
         return upload(request, error="File not found")
 
-    myroot = ET.fromstring(readfile(request))
+    myroot = ElTr.fromstring(readfile(request))
 
     lanelist = []
     processlist = []
@@ -34,71 +34,71 @@ def result(request):
     # go into bpmn:definitions child 
     for child in myroot:
         # find number of bpmn:process child
-        if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}process":
+        if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}process":
             # save the all process child in a list
             processlist.append(child)
 
     for process in processlist:
         for child in process:
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}laneSet":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}laneSet":
                 laneSet = child
                 for lane in laneSet:
                     lanelist.append(lane)
 
     for process in processlist:
         for child in process:
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}startEvent":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}startEvent":
                 events.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}endEvent":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}endEvent":
                 events.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}intermediateCatchEvent":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}intermediateCatchEvent":
                 events.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}intermediateThrowEvent":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}intermediateThrowEvent":
                 events.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}boundaryEvent":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}boundaryEvent":
                 events.append(child)
 
     for process in processlist:
         for child in process:
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}task":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}task":
                 tasks.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}userTask":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}userTask":
                 tasks.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}serviceTask":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}serviceTask":
                 tasks.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}scriptTask":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}scriptTask":
                 tasks.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}businessRuleTask":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}businessRuleTask":
                 tasks.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}sendTask":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}sendTask":
                 tasks.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}receiveTask":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}receiveTask":
                 tasks.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}manualTask":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}manualTask":
                 tasks.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}callActivity":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}callActivity":
                 tasks.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}subProcess":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}subProcess":
                 tasks.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}transaction":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}transaction":
                 tasks.append(child)
 
     for process in processlist:
         for child in process:
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}exclusiveGateway":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}exclusiveGateway":
                 gateways.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}inclusiveGateway":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}inclusiveGateway":
                 gateways.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}parallelGateway":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}parallelGateway":
                 gateways.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}eventBasedGateway":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}eventBasedGateway":
                 gateways.append(child)
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}complexGateway":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}complexGateway":
                 gateways.append(child)
 
     for process in processlist:
         for child in process:
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}sequenceFlow":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}sequenceFlow":
                 flows.append(child)
 
     template_name = "index.html"
@@ -125,13 +125,13 @@ def result(request):
     # go into extensionElements tag
     for task in tasks:
         for child in task:
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}extensionElements":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}extensionElements":
                 for child2 in child:
-                    if child2.tag == "{http://camunda.org/schema/zeebe/1.0}properties":
+                    if child2.tag == "{https://camunda.org/schema/zeebe/1.0}properties":
                         current_time = 0.0
                         current_probability = 1.0
                         for child3 in child2:
-                            if child3.tag == "{http://camunda.org/schema/zeebe/1.0}property":
+                            if child3.tag == "{https://camunda.org/schema/zeebe/1.0}property":
                                 # check if it have a Probability property
                                 if child3.attrib['name'] == "Probability":
                                     current_probability = float(child3.attrib['value'])
@@ -143,13 +143,13 @@ def result(request):
                                     # check if the task is in a lane
                                     for lane in lanelist:
                                         for child4 in lane:
-                                            if child4.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}flowNodeRef":
+                                            if child4.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}flowNodeRef":
                                                 if child4.text == task.attrib['id']:
                                                     lanes_data[lane.attrib['name']] += int(child3.attrib['value'])
                                     # check if the task is in a process
                                     for process in processlist:
                                         for child4 in process:
-                                            if child4.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}task":
+                                            if child4.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}task":
                                                 if child4.attrib['id'] == task.attrib['id']:
                                                     processes_data[process.attrib['name']] += int(
                                                         child3.attrib['value'])
@@ -160,13 +160,13 @@ def result(request):
     for event in events:
         event_data[event.attrib['name']] = 0
         for child in event:
-            if child.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}extensionElements":
+            if child.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}extensionElements":
                 for child2 in child:
-                    if child2.tag == "{http://camunda.org/schema/zeebe/1.0}properties":
+                    if child2.tag == "{https://camunda.org/schema/zeebe/1.0}properties":
                         current_time = 0.0
                         current_probability = 1.0
                         for child3 in child2:
-                            if child3.tag == "{http://camunda.org/schema/zeebe/1.0}property":
+                            if child3.tag == "{https://camunda.org/schema/zeebe/1.0}property":
                                 # check if it have a Probability property
                                 if child3.attrib['name'] == "Probability":
                                     current_probability = float(child3.attrib['value'])
@@ -178,13 +178,13 @@ def result(request):
                                     # check if the task is in a lane
                                     for lane in lanelist:
                                         for child4 in lane:
-                                            if child4.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}flowNodeRef":
+                                            if child4.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}flowNodeRef":
                                                 if child4.text == event.attrib['id']:
                                                     lanes_data[lane.attrib['name']] += int(child3.attrib['value'])
                                     # check if the task is in a process
                                     for process in processlist:
                                         for child4 in process:
-                                            if child4.tag == "{http://www.omg.org/spec/BPMN/20100524/MODEL}event":
+                                            if child4.tag == "{https://www.omg.org/spec/BPMN/20100524/MODEL}event":
                                                 if child4.attrib['id'] == event.attrib['id']:
                                                     processes_data[process.attrib['name']] += int(
                                                         child3.attrib['value'])
@@ -235,10 +235,8 @@ def upload(request, error=None):
             if os.path.isfile("static/upload/bpmn.xml"):
                 os.remove("static/upload/bpmn.xml")
             filename = fs.save("static/upload/bpmn.xml", request.FILES['file'])
-            uploaded_file_url = fs.url(filename)
+            fs.url(filename)
             return redirect('result')
-
-
     else:
         form = forms.UploadFileForm()
 
