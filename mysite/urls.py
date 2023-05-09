@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('parser.urls')),
     path('upload', views.upload, name='upload'),
     path('admin/', admin.site.urls),
+    path(r'', include('webmaster_verification.urls')),
 ]
