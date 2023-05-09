@@ -25,11 +25,6 @@ if __name__ == "__main__":
 # from django.shortcuts import render
 # from django.http import HttpResponse
 # from django.template import loader
-# from django.conf import settings
-# from django.core.files.storage import FileSystemStorage
-# from django.contrib.sitemaps import Sitemap
-# from django.contrib.sitemaps.views import sitemap
-# from django.urls import path
 
 
 
