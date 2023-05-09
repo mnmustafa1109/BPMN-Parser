@@ -30,13 +30,6 @@ if __name__ == "__main__":
 # from django.contrib.sitemaps import Sitemap
 # from django.contrib.sitemaps.views import sitemap
 # from django.urls import path
-# from django.contrib.sitemaps import views
-# from django.contrib.sitemaps.views import sitemap
-# from django.urls import path
-# from django.contrib.sitemaps import views
-# from django.contrib.sitemaps.views import sitemap
-# from django.urls import path
-# from django.contrib.sitemaps import views
-# from django.contrib.sitemaps.views import sitemap
+
 
 
