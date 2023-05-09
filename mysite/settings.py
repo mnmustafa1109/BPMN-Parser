@@ -23,10 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*zv86^56j(#20)t@lleaj1wgf&r^b$rvd5@6_(bjvbgx+wvtbr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]  # new
 CSRF_TRUSTED_ORIGINS = ["https://bpmn-parser.fly.dev"]
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+
 
 # Application definition
 
@@ -38,8 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webmaster_verification',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'parser',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
